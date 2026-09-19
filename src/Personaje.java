@@ -25,7 +25,10 @@ public class Personaje {
         return nivel;
     }
 
-    
+    //MostrarInfo
+    public void mostrarInfo(){
+        System.out.println("ID: " + id + " | Nombre: " + nombre + " | Nivel: " + nivel);
+    }
 
     
 
