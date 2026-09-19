@@ -30,6 +30,11 @@ public class Personaje {
         System.out.println("ID: " + id + " | Nombre: " + nombre + " | Nivel: " + nivel);
     }
 
+    //Accion
+    public String realizarAccion(){
+        System.out.println("El personaje realiza una accion general");
+    }
+
     
 
 }
