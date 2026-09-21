@@ -1,12 +1,12 @@
 //Hereda los datos de personaje 
 public class Guerrero extends Personaje{
-    public Guerrero (int id){
+    public Guerrero (int id, String nombre, int nivel){
         //Llamamos al constructor de la clase padre
-        super(id, personaje: "Guerrero");
+        super(id, nombre, nivel);
     }
 
-    @override
-    public void mostrarAccion(){
-        System.out.println("Atraviesa al enemigo con su lanza de acero sagrado");
+    @Override
+    public String realizarAccion(){
+        return "Atraviesa al enemigo con su lanza de acero sagrado";
     }
 }

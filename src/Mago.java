@@ -1,11 +1,11 @@
 //Hereda los datos de personaje
 public class Mago extends Personaje{
-    public Mago (int id){
-        super(id, personaje: "Mago");
+    public Mago (int id, String nombre, int nivel){
+        super(id, nombre, nivel);
     }
 
-    @override
-    public void mostrarAccion(){
-        System.out.println("Canaliza un rayo de energia astral desde el cielo");
+    @Override
+    public String realizarAccion(){
+        return "Canaliza un rayo de energia astral desde el cielo";
     }
 }

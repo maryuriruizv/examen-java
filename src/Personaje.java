@@ -8,8 +8,8 @@ public class Personaje {
     //Constructor
     public Personaje(int id, String nombre, int nivel){
         this.id = id;
-        this.String = nombre;
-        this.int = nivel;
+        this.nombre = nombre;
+        this.nivel = nivel;
     }
 
     //Getters
@@ -32,9 +32,6 @@ public class Personaje {
 
     //Accion
     public String realizarAccion(){
-        System.out.println("El personaje realiza una accion general");
+        return "El personaje realiza una accion general";
     }
-
-    
-
 }

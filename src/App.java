@@ -9,12 +9,15 @@ Enunciado:
     identificador, un nombre y un nivel, pero cada tipo realiza una acción diferente. El sistema debe guardar los
     objetos en una sola colección, mostrarlos y buscar uno por su identificador.
 */
-
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class App {
-    public static void main(String[]args) throws Exception {
+    public static void main(String[]args) throws Exception{
         Scanner sc = new Scanner(System.in);
+
+        //Declaramos la lista Unica de personajes antes del bucle Do-While
+        ArrayList<Personaje> listaPersonajes = new ArrayList<>();
 
         int opcion = 0;
         do{
@@ -26,77 +29,86 @@ public class App {
                 System.out.println("4. Salir");
                 System.out.println("SELECCIONE UNA OPCION POR FAVOR:");
 
-                Opcion = sc.nexInt();
+                opcion = sc.nextInt();
 
                 switch (opcion) {
                     case 1:
+                        System.out.println("Elija el tipo: 1 = Guerrero | 2 = Mago");
+                        int tipo = sc.nextInt();
+                        sc.nextLine(); // Limpiar el buffer 
+
                         System.out.println("Ingrese ID del personaje: ");
                         int id = sc.nextInt();
+                        sc.nextLine(); // Limpiar el buffer
     
                         System.out.println("Ingrese nombre del personaje: ");
                         String nombre = sc.next(); 
     
                         System.out.println("Ingrese nivel del personaje: ");
                          int nivel = sc.nextInt();
+                         sc.nextLine(); // Limpiar el buffer
 
                         // Validaciones: id > 0, nombre no vacío y nivel entre 1 y 100
                         if (id > 0 && !nombre.isEmpty() && nivel >= 1 && nivel <= 100) {
-                        if (tipo == 1) {
-                            personajes.add(new Guerrero(id)); // Ajusta los parámetros del constructor si tu clase recibe nombre y nivel
-                            System.out.println("¡Guerrero registrado exitosamente!");
-                        } else if (tipo == 2) {
-                            personajes.add(new Mago(id)); // Ajusta los parámetros del constructor si tu clase recibe nombre y nivel
-                            System.out.println("¡Mago registrado exitosamente!");
+                            if (tipo == 1) {
+                                
+                                listaPersonajes.add(new Guerrero(id, nombre, nivel)); // Ajusta los parametros del constructor si tu clase recibe nombre y nivel
+                                System.out.println("¡Guerrero registrado exitosamente!");
+                        
+                            } else if (tipo == 2) {
+                            
+                                listaPersonajes.add(new Mago(id, nombre, nivel)); // Ajusta los parámetros del constructor si tu clase recibe nombre y nivel
+                                System.out.println("Mago registrado exitosamente!");
+
                         } else {
-                            System.out.println("Tipo de personaje inválido. No se registró el objeto.");
+                                System.out.println("Tipo de personaje inválido. No se registró el objeto.");
                         }
                         } else {
-                        System.out.println("Error de validación: El ID debe ser mayor a 0, el nombre no puede estar vacío y el nivel debe estar entre 1 y 100.");
+                                System.out.println("Error de validación: El ID debe ser mayor a 0, el nombre no puede estar vacío y el nivel debe estar entre 1 y 100.");
                         }
                         break;
 
                     case 2:
-                        System.out.println("Mostrando Personajes");
-                        ArrayList<Personaje> listaPersonajes = new ArrayList<>();
-
-                        if( 
-                            //Recorrer el ArrayList
-                            for(Personaje p: listaPersonajes){
-                            //LLamamos mostrarInfo y relizar Accion
+                        System.out.println("Mostrando Personajes:");
+    
+                        // Condición correcta: Evaluamos si la lista está vacía usando .isEmpty()
+                        if (listaPersonajes.isEmpty()) {
+                            // Si está vacía, mostramos el mensaje de error directamente
+                            System.out.println("No hay ningún Personaje registrado");
+                        } else {
+                            // Si NO está vacía, recorremos y ejecutamos las acciones
+                            for (Personaje p : listaPersonajes) {
                             p.mostrarInfo();
-                            p.realizarAccion();
-                            }
-
-                        )else{
-                            (listaPersonajes.isEmpty());
-                            //Si la lista esta vacia, mostrar un mensaje claro 
-                            System.out.println("No hay ningun Personaje registrado");
+                            System.out.println("Accion " + p.realizarAccion());
+                        }
                         }
                         break;
 
+
                     case 3:
-                        // ID del usuario
-                        int idBuscado = 5; 
+                        System.out.println("Buscar Personaje por ID");
+                        System.out.println("Ingrese el ID a buscar: ");
+                        int idBuscado=sc.nextInt();
 
                         // Variable para saber si lo encontramos o no
                         Personaje personajeEncontrado = null;
 
                         // Busqueda secuencial
                         for (Personaje p : listaPersonajes) {
-                        if (p.getId() == idBuscado) { // Comparamos el ID de cada personaje
-                        personajeEncontrado = p;  // Lo guardamos
-                        break;                    //Se detiene al encontrar la primera coincidencia
-                        }
+                            if (p.getId() == idBuscado) { // Comparamos el ID de cada personaje
+                            personajeEncontrado = p;  // Lo guardamos
+                            break;                    
+                            }
                         }
 
                         //fuera del bucle
                         if (personajeEncontrado != null) {
                         //Si existe, mostrar su información y la acción que realiza
-                        personajeEncontrado.mostrarInfo();
-                        personajeEncontrado.realizarAccion();
+                            personajeEncontrado.mostrarInfo();
+                            personajeEncontrado.realizarAccion();
                         } else {
                         //Si no existe, mostrar el mensaje exacto solicitado
-                        System.out.println("Personaje no encontrado");
+                            System.out.println("Personaje no encontrado");
                         }
                         break;
 
